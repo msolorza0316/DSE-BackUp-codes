@@ -1,0 +1,136 @@
+{# UPDATE THE FOLLOWING VARIABLES WHEN YOU  UPDATE THE CSV #}
+{% set inFlowsStartYear = 2010 %}
+{% set outFlowsStartYear = 2009 %}
+{# UPDATE THE ABOVE VARIABLES WHEN YOU  UPDATE THE CSV #}
+{# COUNTRIES CODES #}
+{% set countryCode = {"AFG":"Afghanistan","ALB":"Albania","DZA":"Algeria","ASM":"American Samoa","AND":"Andorra","AGO":"Angola","ATG":"Antigua and Barbuda","ARG":"Argentina","ARM":"Armenia","ABW":"Aruba","AUS":"Australia","AUT":"Austria","AZE":"Azerbaijan","BHS":"Bahamas, The","BHR":"Bahrain","BGD":"Bangladesh","BRB":"Barbados","BLR":"Belarus","BEL":"Belgium","BLZ":"Belize","BEN":"Benin","BMU":"Bermuda","BTN":"Bhutan","BOL":"Bolivia","BIH":"Bosnia and Herzegovina","BWA":"Botswana","BRA":"Brazil","BRN":"Brunei Darussalam","BGR":"Bulgaria","BFA":"Burkina Faso","BDI":"Burundi","CPV":"Cabo Verde","KHM":"Cambodia","CMR":"Cameroon","CAN":"Canada","CYM":"Cayman Islands","CAF":"Central African Republic","TCD":"Chad","CHI":"Channel Islands","CHL":"Chile","CHN":"China","COL":"Colombia","COM":"Comoros","COD":"Democratic Republic of Congo","COG":"Republic of Congo","CRI":"Costa Rica","CIV":"Cote d'Ivoire","HRV":"Croatia","CUB":"Cuba","CUW":"Curacao","CYP":"Cyprus","CZE":"Czech Republic","DNK":"Denmark","DJI":"Djibouti","DMA":"Dominica","DOM":"Dominican Republic","ECU":"Ecuador","EGY":"Egypt, Arab Rep.","SLV":"El Salvador","GNQ":"Equatorial Guinea","ERI":"Eritrea","EST":"Estonia","ETH":"Ethiopia","FRO":"Faroe Islands","FJI":"Fiji","FIN":"Finland","FRA":"France","PYF":"French Polynesia","GAB":"Gabon","GMB":"Gambia, The","GEO":"Georgia","DEU":"Germany","GHA":"Ghana","GRC":"Greece","GRL":"Greenland","GRD":"Grenada","GUM":"Guam","GTM":"Guatemala","GIN":"Guinea","GNB":"Guinea-Bissau","GUY":"Guyana","HTI":"Haiti","HND":"Honduras","HKG":"Hong Kong SAR, China","HUN":"Hungary","ISL":"Iceland","IND":"India","IDN":"Indonesia","IRN":"Iran, Islamic Rep.","IRQ":"Iraq","IRL":"Ireland","IMN":"Isle of Man","ISR":"Israel","ITA":"Italy","JAM":"Jamaica","JPN":"Japan","JOR":"Jordan","KAZ":"Kazakhstan","KEN":"Kenya","KIR":"Kiribati","PRK":"Korea, Dem. Rep.","KOR":"Korea, Rep.","XKX":"Kosovo","KWT":"Kuwait","KGZ":"Kyrgyz Republic","LAO":"Lao PDR","LVA":"Latvia","LBN":"Lebanon","LSO":"Lesotho","LBR":"Liberia","LBY":"Libya","LIE":"Liechtenstein","LTU":"Lithuania","LUX":"Luxembourg","MAC":"Macao SAR, China","MKD":"North Macedonia","MDG":"Madagascar","MWI":"Malawi","MYS":"Malaysia","MDV":"Maldives","MLI":"Mali","MLT":"Malta","MHL":"Marshall Islands","MRT":"Mauritania","MUS":"Mauritius","MEX":"Mexico","FSM":"Micronesia, Fed. Sts.","MDA":"Moldova","MCO":"Monaco","MNG":"Mongolia","MNE":"Montenegro","MAR":"Morocco","MOZ":"Mozambique","MMR":"Myanmar","NAM":"Namibia","NPL":"Nepal","NLD":"Netherlands","NCL":"New Caledonia","NZL":"New Zealand","NIC":"Nicaragua","NER":"Niger","NGA":"Nigeria","MNP":"Northern Mariana Islands","NOR":"Norway","OMN":"Oman","PAK":"Pakistan","PLW":"Palau","PAN":"Panama","PNG":"Papua New Guinea","PRY":"Paraguay","PER":"Peru","PHL":"Philippines","POL":"Poland","PRT":"Portugal","PRI":"Puerto Rico","QAT":"Qatar","ROU":"Romania","RUS":"Russian Federation","RWA":"Rwanda","WSM":"Samoa","SMR":"San Marino","STP":"Sao Tome and Principe","SAU":"Saudi Arabia","SEN":"Senegal","SRB":"Serbia","SYC":"Seychelles","SLE":"Sierra Leone","SGP":"Singapore","SXM":"Sint Maarten (Dutch part)","SVK":"Slovak Republic","SVN":"Slovenia","SLB":"Solomon Islands","SOM":"Somalia","ZAF":"South Africa","SSD":"South Sudan","ESP":"Spain","LKA":"Sri Lanka","KNA":"St. Kitts and Nevis","LCA":"St. Lucia","MAF":"St. Martin (French part)","VCT":"St. Vincent and the Grenadines","SDN":"Sudan","SUR":"Suriname","SWZ":"Eswatini","SWE":"Sweden","CHE":"Switzerland","SYR":"Syrian Arab Republic","TJK":"Tajikistan","TZA":"Tanzania","THA":"Thailand","TLS":"Timor-Leste","TGO":"Togo","TON":"Tonga","TTO":"Trinidad and Tobago","TUN":"Tunisia","TUR":"Turkey","TKM":"Turkmenistan","TCA":"Turks and Caicos Islands","TUV":"Tuvalu","UGA":"Uganda","UKR":"Ukraine","ARE":"United Arab Emirates","GBR":"United Kingdom","USA":"the US","URY":"Uruguay","UZB":"Uzbekistan","VUT":"Vanuatu","VEN":"Venezuela, RB","VNM":"Vietnam","VIR":"Virgin Islands (U.S.)","PSE":"West Bank and Gaza","YEM":"Yemen, Rep.","ZMB":"Zambia","ZWE":"Zimbabwe","WLD":"World"} %}
+
+{% set sendAltUrls = {"CIV":"/international-money-transfers/send-money-to-ivory-coast", "GMB":"/international-money-transfers/send-money-to-gambia", "HKG":"/international-money-transfers/send-money-to-hong-kong", "LAO":"/international-money-transfers/send-money-to-laos", "MAC":"/international-money-transfers/send-money-to-macau", "RUS":"/international-money-transfers/send-money-to-russia", "SYR":"/international-money-transfers/send-money-to-syria", "GBR":"/international-money-transfers/send-money-to-uk","VEN":"/international-money-transfers/send-money-to-venezuela" } %}
+
+{% set send404urls = ["/international-money-transfers/send-money-to-antigua-and-barbuda", "/international-money-transfers/send-money-to-aruba", "/international-money-transfers/send-money-to-belize", "/international-money-transfers/send-money-to-bhutan","/international-money-transfers/send-money-to-burkina-faso", "/international-money-transfers/send-money-to-cabo-verde", "/international-money-transfers/send-money-to-comoros", "/international-money-transfers/send-money-to-curacao", "/international-money-transfers/send-money-to-djibouti", "/international-money-transfers/send-money-to-faroe-islands", "/international-money-transfers/send-money-to-grenada", "/international-money-transfers/send-money-to-guinea-bissau", "/international-money-transfers/send-money-to-guyana", "/international-money-transfers/send-money-to-kazakhstan", "/international-money-transfers/send-money-to-kosovo", "/international-money-transfers/send-money-to-mali", "/international-money-transfers/send-money-to-marshall-islands", "/international-money-transfers/send-money-to-north-macedonia", "/international-money-transfers/send-money-to-palau", "/international-money-transfers/send-money-to-sao-tome-and-principe", "/international-money-transfers/send-money-to-st.-kitts-and-nevis", "/international-money-transfers/send-money-to-st.-lucia", "/international-money-transfers/send-money-to-st.-vincent-and-the-grenadines", "/international-money-transfers/send-money-to-suriname", "/international-money-transfers/send-money-to-tuvalu"] %}
+
+{# LOGIC #}
+{% set dest = rows[0]['destination'] %}
+
+{% set SendToC = [] %}
+{% set SendToV = [] %}
+{% set SendFromC = [] %}
+{% set SendFromV = [] %}
+
+
+{% for item in rows %}
+	{% if item.countryOrig == dest %}
+		{% set SendToC = SendToC|merge([item.countryDest]) %}
+		{% set SendToV = SendToV|merge([item.value]) %}
+	{% else %}
+		{% set SendFromC = SendFromC|merge([item.countryOrig]) %}
+		{% set SendFromV = SendFromV|merge([item.value]) %}
+	{% endif %}
+{% endfor %}
+
+{# CONTENT #}
+{{ rows[0]['countryFullName']|replace({'the ': 'The '}) }} sent about ${{ rows[0][dest]|number_format(2, '.', ',') }}M in remittances to {{ countryCode[dest] }} in {{ rows[0]['BI_YEAR'] }}. In {{ inFlowsStartYear + 9 }}, remittances made up about {{ rows[0]['dest_IN_REM_2019_GDP_PERCENT'] }}% of {{ countryCode[dest] }}’s GDP, according to data from the World Bank Group.
+
+When sending money from {{ rows[0]['countryFullName'] }} to {{ countryCode[dest] }}, you’ll often find the best deal by shopping around and comparing as many money transfer providers as possible.
+
+<h3>Remittance to {{ countryCode[dest] }} by the numbers</h3>
+Data on remittances includes transfers sent through money transfer services, banks and similar services. Examples of these types of providers can be found in our <a href="#compare" class="scroll">money transfer comparison table</a>.
+
+<h4>Top 5 countries that send money to {{ countryCode[dest] }}</h4>
+<em>This table uses World Bank Group data from {{ rows[0]['BI_YEAR'] }}.</em>
+
+<table class="luna-table luna-table--responsiveList">
+	<thead class="luna-table__header">
+		<tr>
+		<th scope="col">Country</th>
+		<th scope="col">Amount sent</th>
+		[fin_hide]<th scope="col">% of total received by {{ countryCode[dest] }}</th>[/fin_hide]
+		</tr>
+	</thead>
+	<tbody class="luna-table__body">
+		{% for i in range(0,4) %}
+			<tr>
+				<td>{{ countryCode[SendFromC[i]] }}</td>
+				<td>${{ SendFromV[i]|number_format(2, '.', ',') }}M</td>
+				[fin_hide]<td></td>[/fin_hide]
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+<h4>Top 5 countries that {{ countryCode[dest] }} sends money to</h4>
+<em>This table uses World Bank Group data from {{ rows[0]['BI_YEAR'] }}.</em>
+
+<table class="luna-table luna-table--responsiveList">
+	<thead class="luna-table__header">
+		<tr>
+		<th scope="col">Country</th>
+		<th scope="col">Amount received</th>
+		[fin_hide]<th scope="col">% of total received from all countries</th>[/fin_hide]
+		</tr>
+	</thead>
+	<tbody class="luna-table__body">
+		{% for i in range(0,4) %}
+			<tr>
+				<td>{{ countryCode[SendToC[i]] }}</td>
+				<td>${{ SendToV[i]|number_format(2, '.', ',') }}M</td>
+				[fin_hide]<td></td>[/fin_hide]
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+<h3>Remittances to and from {{ countryCode[dest] }} by year</h3>
+<p>As global and domestic circumstances change, many countries find their incoming and outgoing remittances shifting year by year. Use our table and graph to get an idea of whether remittances to {{ countryCode[dest] }} are trending up or down, based on data from at least the last decade.</p>
+
+<h4> {{ countryCode[dest]|replace({'the ': 'The '}) }}’s outgoing remittances from {{ outFlowsStartYear }} to {{ outFlowsStartYear + 9  }}</h4>
+<em>This table uses World Bank Group data from {{ outFlowsStartYear + 9 }}.</em>
+
+<table class="luna-table luna-table--responsiveList">
+	<thead class="luna-table__header">
+		<tr>
+		<th scope="col">Year</th>
+		<th scope="col">{{ countryCode[dest] }} outgoing remittances (in millions)</th>
+		</tr>
+	</thead>
+	<tbody class="luna-table__body">
+	{% for i in range(0,9) %}
+	<tr>
+		<td>{{ outFlowsStartYear + i }}</td>
+		<td>${{ rows[0][( 'OU_REM_' ~ (outFlowsStartYear + i) )]|number_format(2, '.', ',') }}M</td>
+	</tr> 
+	{% endfor %}
+	</tbody>
+</table>
+
+<h4>{{ countryCode[dest]|replace({'the ': 'The '}) }}'s incoming remittances from {{ inFlowsStartYear }} to {{ inFlowsStartYear + 9 }}</h4>
+<em>This table uses World Bank Group data from {{ inFlowsStartYear + 9 }}.</em>
+
+<table class="luna-table luna-table--responsiveList">
+	<thead class="luna-table__header">
+	  <tr>
+		<th scope="col">Year</th>
+		<th scope="col">{{ countryCode[dest]|replace({'the ': 'The '}) }} incoming remittances (in millions)</th>
+	  </tr>
+	</thead>
+	<tbody class="luna-table__body">
+		{% for i in range(0,9) %}
+		<tr>
+			<td>{{ inFlowsStartYear + i }}</td>
+			<td>${{ rows[0][( 'IN_REM_' ~ (inFlowsStartYear + i) )]|number_format(2, '.', ',') }}M</td>
+		</tr> 
+		{% endfor %}
+	</tbody>
+  </table>
+
+<h3 id="compare">Send money to {{ countryCode[dest] }} with top providers</h3>
+Enter the amount you want to send and select <b>Calculate</b> to compare minimums, fees and turnaround for top digital money specialists..
+
+[table template="usfin-template" category="137" limit="11" calc_us_v2_calculator="1" fieldset="usfmt-v2" site="imtus" calc_country_from="USA" calc_cur_to="{{dest}}" calc_lead_form_min="200" calc_amount="500"]
+
+[nb:niche code="USFMT" decorator="USFMT.NICHE.LIVE_RATES_DISCLAIMER"]
+
+<h3>Bottom line</h3>
+Global economies shift over time, so the country that might be the largest remittance sender to {{ countryCode[dest] }} this year may not be the largest next year. If you’re looking to send money to loved ones or businesses in {{ countryCode[dest] }}, {% if ("/international-money-transfers/send-money-to-" ~ countryCode[dest]|replace({' ': '-'})|lower) in send404urls %}compare your options {% elseif dest in sendAltUrls|keys %}<a href="https://www.finder.com{{ sendAltUrls[dest] }}">compare your options</a>{% else %}<a href="https://www.finder.com/international-money-transfers/send-money-to-{{ countryCode[dest]|replace({' ': '-'})|lower }}">compare your options</a>{% endif %} to save both money and time.
+<br>
+<sub>Source: <a href="https://www.worldbank.org/en/topic/migrationremittancesdiasporaissues/brief/migration-remittances-data" target="_blank" >World Bank Migrations and Remittances Data</a>, November 2017</sub>
